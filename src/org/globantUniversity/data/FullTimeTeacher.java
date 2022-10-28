@@ -1,19 +1,21 @@
+package org.globantUniversity.data;
+import org.globantUniversity.data.Teacher;
 public class FullTimeTeacher extends Teacher {
-    private float experienceYears;
+    private byte experienceYears;
 
 
-    public FullTimeTeacher(String name, float experienceYears) {
+    public FullTimeTeacher(String name, byte experienceYears) {
         super(name);
         this.experienceYears = experienceYears;
-        this.salary = calculateSalary();
+        this.salary = this.calculateSalary();
 
     }
 
-    public void setExperienceYears(float experienceYears) {
+    public void setExperienceYears(byte experienceYears) {
         this.experienceYears = experienceYears;
     }
 
-    public float getExperienceYears() {
+    public byte getExperienceYears() {
         return this.experienceYears;
     }
 

@@ -1,25 +1,27 @@
+package org.globantUniversity.data;
+
 public class PartTimeTeacher extends Teacher {
-    private float workWeekHours;
+    private byte workWeekHours;
 
 
-    public PartTimeTeacher(String name, float workWeekHours) {
+    public PartTimeTeacher(String name, byte workWeekHours) {
         super(name);
         this.workWeekHours = workWeekHours;
         this.salary = calculateSalary();
 
     }
 
-    public void setWorkWeekHours(float workWeekHours) {
+    public void setWorkWeekHours(byte workWeekHours) {
         this.workWeekHours = workWeekHours;
     }
 
-    public float getWorkWeekHours() {
+    public byte getWorkWeekHours() {
         return workWeekHours;
     }
 
     @Override
     protected float calculateSalary() {
-        return BASESALARY * (this.workWeekHours / 40);
+        return BASESALARY *  ((float) this.workWeekHours / 40);
 
     }
 }

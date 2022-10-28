@@ -1,3 +1,4 @@
+package org.globantUniversity.data;
 public abstract class Teacher {
     protected String name;
     protected float salary;
