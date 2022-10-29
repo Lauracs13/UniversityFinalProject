@@ -1,7 +1,10 @@
 package org.globantUniversity.data;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.util.Date;
+
 public class Student {
     private String name;
     private int id;
@@ -30,9 +33,20 @@ public class Student {
     }
 
     public int ageCalculator(String dateOfBirth) {
-        LocalDate dob = LocalDate.parse(dateOfBirth);
-        LocalDate curDate = LocalDate.now();
-        this.age = Period.between(dob, curDate).getYears();
-        return this.age;
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date dob = formatter.parse(dateOfBirth);
+            Instant instant = dob.toInstant();
+            ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+            LocalDate dobFormatted = zone.toLocalDate();
+            LocalDate curDate = LocalDate.now();
+            this.age = Period.between(dobFormatted, curDate).getYears();
+            return this.age;
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
+
     }
 }
