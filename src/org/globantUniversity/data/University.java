@@ -25,7 +25,8 @@ public class University {
         return this.studentsList;
     }
     public Student getStudentByIndex(int index){ return this.studentsList.get(index); }
-
+    public int getNumberOfStudents() {return this.studentsList.size(); }
+    public String getStudentNameByIndex(int index){ return this.studentsList.get(index).getName();}
     public List<Subject> getSubjectsList() {
         return this.subjectsList;
     }
@@ -36,6 +37,7 @@ public class University {
         Subject currentSubject = this.subjectsList.get(index);
         return "Subject " + currentSubject.getName() + " is taught by the professor " +
                 currentSubject.getTeachersName() + " and the students are:" + currentSubject.getStudentsInfo();}
+    public String getTeacherNameByIndex(int index){ return this.teachersList.get(index).getName();}
     public String getTeacherInfoByIndex(int index){
         Teacher currentTeacher = this.teachersList.get(index);
         return "Name: " + currentTeacher.getName() + ", Type of contract: "
@@ -45,14 +47,20 @@ public class University {
         this.teachersList.add(teacher);
     }
 
+    public boolean addStudent(String name, String dateOfBirth) {
+        Student student = new Student(name, dateOfBirth);
+       return this.studentsList.add(student);
+    }
+
     public void addStudent(Student student) {
         this.studentsList.add(student);
     }
-
-    public void addSubject(Subject subject) {
+        public String addSubject(Subject subject) {
         this.subjectsList.add(subject);
+        return subject.getName() + " successfully added to the university";
     }
 
     public void addTeacherToSubject(Subject subject, Teacher teacher) {subject.addTeacher(teacher); }
-    public void addStudentToSubject(Subject subject, Student student) {subject.addStudent(student); }
+    public void addStudentToSubject(Subject subject, Student student) {
+        subject.addStudent(student); }
 }
