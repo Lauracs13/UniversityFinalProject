@@ -1,13 +1,14 @@
 package org.globantUniversity.view;
 
 import org.globantUniversity.data.Student;
-import org.globantUniversity.data.PartTimeTeacher;
-import org.globantUniversity.data.FullTimeTeacher;
+
 import org.globantUniversity.data.Subject;
 import org.globantUniversity.data.Teacher;
 import org.globantUniversity.data.University;
 import org.globantUniversity.persistence.DataInitializer;
 
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -33,16 +34,19 @@ public class Main {
                     printSubjectsList(university);
                     break;
                 case "3":
-                    //  registerNewStudent(name, dateOfBirth);
+                    registerNewStudent(university);
                     break;
                 case "4":
-                    createSubject(university);
+                   createSubject(university);
+                    break;
+                case "5":
+                    subjectsStudentAttends(university);
                     break;
                 case "6":
                     exit = true;
                     break;
                 default:
-                    System.out.println("Please type a valid option");
+                    System.out.println("\nPlease type a valid option");
                     break;
             }
         } while (!exit);
@@ -89,21 +93,64 @@ public class Main {
         }
     }
 
-    public static void registerNewStudent() {
+    public static void registerNewStudent(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Write the name of the student");
         String name = scan.nextLine();
         scan = new Scanner(System.in);
+        System.out.println("Write the day of birth (dd)");
+        int day = scan.nextInt();
+        scan = new Scanner(System.in);
+        System.out.println("Write the month of birth (mm)");
+        int month = scan.nextInt();
+        scan = new Scanner(System.in);
+        System.out.println("Write the year of birth (yyyy)");
+        int year = scan.nextInt();
+        scan = new Scanner(System.in);
+if (isDateValid(day, month, year)){
+    String fullDate = day + "-" + month + "-" + year + "-";
+    Student student = new Student(name, fullDate);
+    System.out.println(university.addStudent(student));
+    addStudentToSubject(student, university);
+} else {
+    System.out.println("Please write a valid date");
+}
+
     }
 
-    public static void addStudentToSubject(Student student, University university, int index) {
-        if (index < 0 || index >= university.getNumberOfSubjects()) {
-            System.out.println("Please type a valid number");
+    public static void addStudentToSubject(Student student, University university) {
+
+        if (university.getNumberOfSubjects() == 0) {
+            System.out.println("There are no registered subjects");
         } else {
-            Subject currentSubject = university.getSubjectByIndex(index);
-            currentSubject.addStudent(student);
+            boolean exit = false;
+            do {
+                System.out.println("\nType the number of the subject to add the student:");
+                for (int i = 0; i < university.getNumberOfSubjects(); i++) {
+                    System.out.println(i + 1 + ". " + university.getSubjectNameByIndex(i));
+                }
+                System.out.println(university.getNumberOfSubjects() + 1 + ". Back to the previous menu");
+                Scanner scan = new Scanner(System.in);
+                int option = scan.nextInt();
+                option = option - 1;
+                if (option == university.getNumberOfSubjects()) {
+                    exit = true;
+                } else {
+                    addStudentToSubjectByIndex(student, university, option);
+                }
+            } while (!exit);
         }
     }
+        public static void addStudentToSubjectByIndex(Student student, University university, int option) {
+            if (option < 0 || option >= university.getNumberOfSubjects()) {
+                System.out.println("Please type a valid number");
+            } else {
+                Subject currentSubject = university.getSubjectByIndex(option);
+                currentSubject.addStudent(student);
+            }
+        }
+
+
 
     public static void createSubject(University university) {
         Scanner scan = new Scanner(System.in);
@@ -200,5 +247,66 @@ public class Main {
             Student currentStudent = university.getStudentByIndex(option);
             System.out.println( subject.addStudent(currentStudent) );
         }
+    }
+
+    public static void subjectsStudentAttends(University university){
+        boolean exit = false;
+        do {
+            System.out.println("\nType the number of the student to see the subjects he/she attends:");
+            for (int i = 0; i < university.getNumberOfStudents(); i++) {
+                System.out.println(i + 1 + ". " + university.getStudentNameByIndex(i));
+            }
+            System.out.println(university.getNumberOfStudents() + 1 + ". Back to the previous menu");
+            Scanner scan = new Scanner(System.in);
+            int option = scan.nextInt();
+            option = option - 1;
+            if (option == university.getNumberOfStudents()) {
+                exit = true;
+            } else {
+                Student currentStudent = university.getStudentByIndex(option);
+                searchSubjectsByStudent(currentStudent, university);
+            }
+        } while (!exit);
+    }
+
+    public static void searchSubjectsByStudent(Student student, University university){
+        List<String> subjectsAttended = university.searchSubjectsByStudentId(student.getId());
+            System.out.println("\nThe subjects attended by student " + student.getName() + " are:");
+            for (int i = 0; i < subjectsAttended.size(); i++) {
+                System.out.println("-> " + subjectsAttended.get(i));
+            }
+    }
+
+    // the following method is taken from https://www.geeksforgeeks.org/program-check-date-valid-not/
+    public static boolean isDateValid(int day, int month, int year) {
+        int MAX_VALID_YR = 9999;
+        int MIN_VALID_YR = 1800;
+        if (year > MAX_VALID_YR || year < MIN_VALID_YR) {
+            return false;
+        }
+        if (month < 1 || month > 12) {
+            return false;
+        }
+        if (day < 1 || day > 31) {
+            return false;
+        }
+        if (month == 2) {
+            if (isLeap(year)) {
+                return (day <= 29);
+            } else {
+                return (day <= 28);
+            }
+        }
+        if (month == 4 || month == 6 ||
+                month == 9 || month == 11)
+            return (day <= 30);
+
+        return true;
+    }
+
+    static boolean isLeap(int year) {
+        return (((year % 4 == 0) &&
+                (year % 100 != 0)) ||
+                (year % 400 == 0));
     }
 }

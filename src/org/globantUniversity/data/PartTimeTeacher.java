@@ -15,13 +15,13 @@ public class PartTimeTeacher extends Teacher {
         this.workWeekHours = workWeekHours;
     }
 
-   public byte getWorkWeekHours() {
+    public byte getWorkWeekHours() {
         return workWeekHours;
     }
 
     @Override
     protected float calculateSalary() {
-        return BASESALARY *  ((float) this.workWeekHours / 40);
+        return BASESALARY * ((float) this.workWeekHours / 40);
 
     }
 }

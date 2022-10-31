@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.Date;
+import java.io.*;
 
 public class Student {
     private String name;
@@ -12,7 +13,7 @@ public class Student {
     private String dateOfBirth;
     private int age;
 
-    public Student (String name, String dateOfBirth) {
+    public Student(String name, String dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.age = ageCalculator(dateOfBirth);
@@ -32,6 +33,7 @@ public class Student {
         return this.age;
     }
 
+    // the following method is adapted from https://www.tutorialspoint.com/how-to-find-the-age-when-date-of-birth-is-known-using-java
     public int ageCalculator(String dateOfBirth) {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -42,9 +44,7 @@ public class Student {
             LocalDate curDate = LocalDate.now();
             this.age = Period.between(dobFormatted, curDate).getYears();
             return this.age;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return 0;
         }
     }

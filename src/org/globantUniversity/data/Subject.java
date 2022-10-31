@@ -36,15 +36,6 @@ public class Subject {
         return this.teacher.getName();
     }
 
-    public String addTeacher(Teacher teacher) {
-        this.teacher = teacher;
-        return teacher.getName() + " successfully added to the subject " + this.name;
-    }
-
-    public String addStudent(Student student) {
-        this.studentsList.add(student);
-        return student.getName() + " with Id: " + student.getId() + " successfully added to the subject " + this.name;
-    }
 
     public Student getStudentByIndex(int index) {
         return this.studentsList.get(index);
@@ -63,5 +54,12 @@ public class Subject {
         }
         return studentsInfo;
     }
-
+        public String addStudent(Student student) {
+        this.studentsList.add(student);
+        return student.getName() + " with Id: " + student.getId() + " successfully added to the subject " + this.name;
+    }
+    public String addTeacher(Teacher teacher) {
+        this.teacher = teacher;
+        return teacher.getName() + " successfully added to the subject " + this.name;
+    }
 }
