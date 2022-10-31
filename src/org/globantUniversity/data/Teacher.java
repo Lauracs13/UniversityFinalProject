@@ -2,6 +2,8 @@ package org.globantUniversity.data;
 public abstract class Teacher {
     protected String name;
     protected float salary;
+
+    protected String TypeOfContract;
     protected final float BASESALARY = 2000;
 
    protected Teacher(String name){
@@ -15,5 +17,9 @@ public abstract class Teacher {
     }
     public String getName() {
         return this.name;
+    }
+
+    public String getTypeOfContract() {
+        return TypeOfContract;
     }
 }

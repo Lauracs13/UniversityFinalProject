@@ -7,13 +7,13 @@ public class Subject {
     private String name;
     private String assignedClassroom;
     private List<Student> studentsList;
-    private List<Teacher> teachersList;
+    private Teacher teacher;
 
     public Subject(String name, String assignedClassroom) {
         this.name = name;
         this.assignedClassroom = assignedClassroom;
         this.studentsList = new ArrayList<>();
-        this.teachersList = new ArrayList<>();
+
     }
 
     public String getName() {
@@ -28,18 +28,38 @@ public class Subject {
         return this.studentsList;
     }
 
-    public List<Teacher> getTeachersList() {
-        return this.teachersList;
-    }
-
     public void setAssignedClassroom(String assignedClassroom) {
         this.assignedClassroom = assignedClassroom;
     }
-    public void addTeacher(Teacher teacher) {
-        this.teachersList.add(teacher);
+
+    public String getTeachersName() {
+        return this.teacher.getName();
     }
+
+    public void addTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     public void addStudent(Student student) {
         this.studentsList.add(student);
+    }
+
+    public Student getStudentByIndex(int index) {
+        return this.studentsList.get(index);
+    }
+
+    public int getNumberOfStudents() {
+        return this.studentsList.size();
+    }
+
+    public String getStudentsInfo() {
+        String studentsInfo = "";
+        for (int i = 0; i < getNumberOfStudents(); i++) {
+            Student currentStudent = this.getStudentByIndex(i);
+            studentsInfo += "\n" + currentStudent.getName() + " , " + currentStudent.getAge()
+                    + " years old, Id: " + currentStudent.getId();
+        }
+        return studentsInfo;
     }
 
 }

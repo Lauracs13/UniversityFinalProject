@@ -1,14 +1,15 @@
 package org.globantUniversity.data;
+
 import org.globantUniversity.data.Teacher;
+
 public class FullTimeTeacher extends Teacher {
     private byte experienceYears;
-
 
     public FullTimeTeacher(String name, byte experienceYears) {
         super(name);
         this.experienceYears = experienceYears;
         this.salary = this.calculateSalary();
-
+        TypeOfContract = "Full time";
     }
 
     public void setExperienceYears(byte experienceYears) {
@@ -18,6 +19,7 @@ public class FullTimeTeacher extends Teacher {
     public byte getExperienceYears() {
         return this.experienceYears;
     }
+
 
     @Override
     protected float calculateSalary() {

@@ -3,11 +3,11 @@ package org.globantUniversity.data;
 public class PartTimeTeacher extends Teacher {
     private byte workWeekHours;
 
-
     public PartTimeTeacher(String name, byte workWeekHours) {
         super(name);
         this.workWeekHours = workWeekHours;
         this.salary = calculateSalary();
+        TypeOfContract = "Part time";
 
     }
 
@@ -15,7 +15,7 @@ public class PartTimeTeacher extends Teacher {
         this.workWeekHours = workWeekHours;
     }
 
-    public byte getWorkWeekHours() {
+   public byte getWorkWeekHours() {
         return workWeekHours;
     }
 
