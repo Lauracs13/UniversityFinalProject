@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class University {
+    /**
+     * Represents the university.
+     */
     private List<Teacher> teachersList;
     private List<Student> studentsList;
     private List<Subject> subjectsList;
@@ -58,6 +61,10 @@ public class University {
         return this.subjectsList.get(index).getName();
     }
 
+    /**
+     * @param index location of a subject in the list of subjects.
+     * @return a string containing info about the subject: name, professor, and students.
+     */
     public String getSubjectDetailsByIndex(int index) {
         Subject currentSubject = this.subjectsList.get(index);
         return "Subject " + currentSubject.getName() + " is taught by the professor " +
@@ -68,6 +75,10 @@ public class University {
         return this.teachersList.get(index).getName();
     }
 
+    /**
+     * @param index location of a professor in the list of professors.
+     * @return a string containing info about the professor: name, type of contract, and salary.
+     */
     public String getTeacherInfoByIndex(int index) {
         Teacher currentTeacher = this.teachersList.get(index);
         return "Name: " + currentTeacher.getName() + ", Type of contract: "
@@ -96,6 +107,10 @@ public class University {
         subject.addStudent(student);
     }
 
+    /**
+     * @param id id of a student.
+     * @return subjects the student is registered for.
+     */
     public List<String> searchSubjectsByStudentId(int id) {
         List<String> subjectsAttended = new ArrayList<>();
         for (Subject subject : this.subjectsList) {

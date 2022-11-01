@@ -1,6 +1,9 @@
 package org.globantUniversity.data;
 
 public class PartTimeTeacher extends Teacher {
+    /**
+     * Represents a professor that works part-time.
+     */
     private byte workWeekHours;
 
     public PartTimeTeacher(String name, byte workWeekHours) {
@@ -19,6 +22,9 @@ public class PartTimeTeacher extends Teacher {
         return workWeekHours;
     }
 
+    /**
+     * @return the salary of a professor based on weekly working hours.
+     */
     @Override
     protected float calculateSalary() {
         return BASESALARY * ((float) this.workWeekHours / 40);

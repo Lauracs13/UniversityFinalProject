@@ -3,7 +3,11 @@ package org.globantUniversity.data;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Subject {
+    /**
+     * Represents a subject taught at the university.
+     */
     private String name;
     private String assignedClassroom;
     private List<Student> studentsList;
@@ -45,6 +49,9 @@ public class Subject {
         return this.studentsList.size();
     }
 
+    /**
+     * @return a String with info about the names, ages, and ids of the students.
+     */
     public String getStudentsInfo() {
         String studentsInfo = "";
         for (int i = 0; i < getNumberOfStudents(); i++) {
@@ -54,10 +61,12 @@ public class Subject {
         }
         return studentsInfo;
     }
-        public String addStudent(Student student) {
+
+    public String addStudent(Student student) {
         this.studentsList.add(student);
         return student.getName() + " with Id: " + student.getId() + " successfully added to the subject " + this.name;
     }
+
     public String addTeacher(Teacher teacher) {
         this.teacher = teacher;
         return teacher.getName() + " successfully added to the subject " + this.name;

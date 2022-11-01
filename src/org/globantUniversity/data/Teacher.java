@@ -1,5 +1,8 @@
 package org.globantUniversity.data;
 public abstract class Teacher {
+    /**
+     * Represents a professor in the university.
+     */
     protected String name;
     protected float salary;
 

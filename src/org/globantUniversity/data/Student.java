@@ -7,6 +7,9 @@ import java.util.Date;
 import java.io.*;
 
 public class Student {
+    /**
+     * Represents a student of the university.
+     */
     private String name;
     private int id;
     private static int count = 10000;
@@ -33,6 +36,10 @@ public class Student {
         return this.age;
     }
 
+    /**
+     * @param dateOfBirth date of birth of the student, string in "dd-MM-yyyy" format.
+     * @return the age of the student.
+     */
     // the following method is adapted from https://www.tutorialspoint.com/how-to-find-the-age-when-date-of-birth-is-known-using-java
     public int ageCalculator(String dateOfBirth) {
         try {
